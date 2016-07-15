@@ -4,8 +4,6 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.jdbc.core.RowMapper;
 
-import com.example.BasicTest.Member;
-
 @RunWith(org.springframework.test.context.junit4.SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(App.class)
 public abstract class BasicTest {
