@@ -9,7 +9,7 @@ import org.springframework.web.filter.DelegatingFilterProxy;
 public class WebConfig {
 
 	@Bean
-	public FilterRegistrationBean filter() {
+	public FilterRegistrationBean delegatingFilterProxy() {
 		FilterRegistrationBean registration = new FilterRegistrationBean();
 		registration.setFilter(new DelegatingFilterProxy("springSecurityFilterChain"));
 		registration.addUrlPatterns("/");
