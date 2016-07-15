@@ -10,7 +10,7 @@
 	SELECT  
 		 id as id
 		,home_city as homeCity
-		,home_Street as homeStreet
+		,home_street as homeStreet
 		,home_zipcode as homeZipCode
 		,name as name
 		,e_date as eDate
@@ -33,4 +33,18 @@
 		Members m
 	GROUP BY m.team_id
 </select>
+<insert id="insert">
+	INSERT
+	INTO 
+	Members
+		(home_city, home_street, home_zipcode, name, e_date, s_date, team_id)
+	VALUES 
+		(#{homeStreet},#{homeStreet},#{homeZipCode},#{name},#{eDate},#{sDate},#{teamId})
+</insert>
+<delete id="delete">
+	DELETE
+	FROM
+	Members
+	Where id = #{id}
+</delete>
 </mapper>

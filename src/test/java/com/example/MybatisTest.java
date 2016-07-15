@@ -2,6 +2,7 @@ package com.example;
 
 import static org.junit.Assert.*;
 
+import java.util.Date;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.*;
@@ -58,5 +59,14 @@ public class MybatisTest extends BasicTest {
 	public void testStatistics2() {
 		List<MemberStatistics> statistics = mapper.statistics();
 		assertThat(statistics.size(), is(2));
+	}
+	@Test
+	public void testInsertMember() {
+		com.example.domain.Member m = new com.example.domain.Member(201, "CITY 201", "STREET 201", "ZIPCODE 201", "name 201", new Date(), new Date(), 2);
+		mapper.insert(m);
+	}
+	@Test
+	public void testDeleteMember() {
+		mapper.delete(202);
 	}
 }
