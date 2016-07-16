@@ -13,7 +13,9 @@
 <resultMap type="com.example.domain.Team" id="teamMap">
 	<id column="team_id" property="id" />
 	<result column="team_name" property="name" />
-	<collection property="members" ofType="com.example.domain.Member">
+	<collection property="members" resultMap="memberMap" />
+</resultMap>
+<resultMap type="com.example.domain.Member" id="memberMap">
 		<id column="member_id" property="id" />
 		<result column="member_home_city" property="homeCity" />
 		<result column="member_home_street" property="homeStreet" />
@@ -22,7 +24,7 @@
 		<result column="member_e_date" property="eDate" />
 		<result column="member_s_Date" property="sDate" />
 		<result column="member_team_id" property="teamId" />
-	</collection>
+		<association property="team" resultMap="teamMap" />
 </resultMap>
 <select id="findOne" resultMap="teamMap">
 	SELECT

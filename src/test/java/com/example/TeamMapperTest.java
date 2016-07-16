@@ -69,7 +69,9 @@ public class TeamMapperTest extends BasicTest {
 	@Test
 	public void testFindOne() {
 		Team t = mapper.findOne(1);
-		assertThat(t, is(notNullValue()));
+		int size = t.getMembers().size();
 		t.getMembers().forEach(System.out::println);
+		assertThat(size, is(100));
+		t.getMembers().forEach(m -> System.out.println(m.getTeam()));
 	}
 }

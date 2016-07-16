@@ -18,7 +18,6 @@ public class MemberMapperTest extends BasicTest {
 		assertThat(mapper, is(notNullValue()));
 		com.example.domain.Member m = mapper.findOne(1);
 		assertThat(m, is(notNullValue()));
-		System.out.println(m.getTeam());
 	}
 
 }
