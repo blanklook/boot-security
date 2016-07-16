@@ -13,7 +13,9 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 public class JdbcTemplateTest extends BasicTest {
 	
 	@Autowired
@@ -33,7 +35,6 @@ public class JdbcTemplateTest extends BasicTest {
 		paramSource.addValue("id", 200);
 		Member m = jdbcTemplate.queryForObject("SELECT id, home_city FROM Members WHERE id = :id", paramSource, super.mapper);
 		assertThat(m, is(notNullValue()));
-		
 	}
 
 }

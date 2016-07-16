@@ -19,6 +19,36 @@
 	FROM 
 		Members
 </select>
+<resultMap type="com.example.domain.Member" id="memberMap">
+	<id column="member_id" property="id" />
+	<result column="member_home_city" property="homeCity" />
+	<result column="member_home_zip_code" property="homeZipCode" />
+	<result column="member_name" property="name" />
+	<result column="member_s_date" property="sDate" />
+	<result column="member_e_date" property="eDate" />
+	<result column="member_team_id" property="teamId" />
+	<association property="team" javaType="com.example.domain.Team">
+		<id column="team_id" property="id" />
+		<result column="team_name" property="name" />
+	</association>
+</resultMap>
+<select id="findOne" parameterType="int" resultMap="memberMap">
+	SELECT  
+		 m.id as member_id
+		,m.home_city as member_home_city
+		,m.home_street as member_home_street
+		,m.home_zipcode as member_home_zip_code
+		,m.name as member_name
+		,m.e_date as member_e_date
+		,m.s_date as member_s_date
+		,m.team_id as member_team_id
+		,t.team_id as team_id
+		,t.team_name as team_name
+	FROM 
+		Members m
+	LEFT OUTER JOIN Team t ON t.team_id =  m.team_id
+	WHERE m.id = #{id}
+</select>
 <select id="statistics" resultType="com.example.domain.MemberStatistics">
 	SELECT
 		team_id as teamID

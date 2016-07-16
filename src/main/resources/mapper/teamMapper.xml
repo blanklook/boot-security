@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.domain.TeamMapper">
+<select id="findAll" resultType="com.example.domain.Team">
+	SELECT  
+		 team_id as id
+		,team_name as name
+	FROM 
+		Team
+</select>
+<resultMap type="com.example.domain.Team" id="teamMap">
+	<id column="team_id" property="id" />
+	<result column="team_name" property="name" />
+	<collection property="members" ofType="com.example.domain.Member">
+		<id column="member_id" property="id" />
+		<result column="member_home_city" property="homeCity" />
+		<result column="member_home_street" property="homeStreet" />
+		<result column="member_home_zipcode" property="homeZipCode" />
+		<result column="member_name" property="name" />
+		<result column="member_e_date" property="eDate" />
+		<result column="member_s_Date" property="sDate" />
+		<result column="member_team_id" property="teamId" />
+	</collection>
+</resultMap>
+<select id="findOne" resultMap="teamMap">
+	SELECT
+		 t.team_id as team_id
+		,t.team_name as team_name
+		,m.id as member_id
+		,m.home_city as member_home_city
+		,m.home_street as member_home_street
+		,m.home_zipcode as member_home_zipcode
+		,m.name as member_name
+		,m.e_date as member_e_date
+		,m.s_date as member_s_date
+		,m.team_id as member_team_id
+	FROM
+		Team t
+	LEFT OUTER JOIN Members m ON m.team_id = t.team_id
+	WHERE t.team_id = #{id}
+</select>
+<select id="findById" parameterType="int" resultType="com.example.domain.Team">
+	SELECT
+		 team_id as id
+		,team_name as name
+	FROM
+		Team
+	WHERE team_id = #{id}
+</select>
+<select id="findByName" parameterType="string" resultType="com.example.domain.Team">
+	SELECT
+		 team_id as id
+		,team_name as name
+	FROM
+		Team
+	WHERE team_name = #{name}
+</select>
+<insert id="insert" parameterType="string">
+	INSERT INTO Team
+		(team_name)
+	VALUES
+		(#{name})
+</insert>
+<delete id="delete" parameterType="int">
+	DELETE FROM Team
+	WHERE team_id = #{id}
+</delete>
+<delete id="deleteByName" parameterType="string">
+	DELETE FROM Team
+	WHERE team_name = #{name}
+</delete>
+</mapper>

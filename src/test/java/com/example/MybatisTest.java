@@ -11,10 +11,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.domain.MemberMapper;
 import com.example.domain.MemberStatistics;
 
+@Transactional
 public class MybatisTest extends BasicTest {
 
 	@Autowired
@@ -62,11 +64,7 @@ public class MybatisTest extends BasicTest {
 	}
 	@Test
 	public void testInsertMember() {
-		com.example.domain.Member m = new com.example.domain.Member(201, "CITY 201", "STREET 201", "ZIPCODE 201", "name 201", new Date(), new Date(), 2);
+		com.example.domain.Member m = new com.example.domain.Member("CITY 201", "STREET 201", "ZIPCODE 201", "name 201", new Date(), new Date(), 2);
 		mapper.insert(m);
-	}
-	@Test
-	public void testDeleteMember() {
-		mapper.delete(202);
 	}
 }

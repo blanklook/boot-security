@@ -12,11 +12,12 @@ public class Member {
 	Date sDate;
 	int teamId;
 	
+	Team team;
+	
 	public Member() {}
 
-	public Member(int id, String homeCity, String homeStreet, String homeZipCode, String name, Date eDate, Date sDate,
+	public Member(String homeCity, String homeStreet, String homeZipCode, String name, Date eDate, Date sDate,
 			int teamId) {
-		this.id = id;
 		this.homeCity = homeCity;
 		this.homeStreet = homeStreet;
 		this.homeZipCode = homeZipCode;
@@ -88,6 +89,14 @@ public class Member {
 
 	public void setTeamId(int teamId) {
 		this.teamId = teamId;
+	}
+	
+	public Team getTeam() {
+		return team;
+	}
+
+	public void setTeam(Team team) {
+		this.team = team;
 	}
 
 	@Override
