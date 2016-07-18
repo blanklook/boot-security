@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.domain.MemberMapper">
+<select id="getTime" resultType="String">
+	SELECT now()
+</select>
+<resultMap type="com.example.domain.Member" id="memberMap">
+	<id column="id" property="id" />
+	<result column="home_city" property="homeCity" />
+	<result column="home_street" property="homeStreet" />
+	<result column="home_zipcode" property="homeZipCode" />
+	<result column="name" property="name" />
+	<result column="s_date" property="sDate" />
+	<result column="e_date" property="eDate" />
+	<result column="team_id" property="teamId" />
+	<association property="team" resultMap="teamMap" />
+</resultMap>
+<resultMap type="com.example.domain.Team" id="teamMap">
+	<id column="team_id" property="id" />
+	<result column="team_name" property="name" />
+</resultMap>
+<select id="findAll" resultMap="memberMap">
+ SELECT
+	  m.id
+	 ,m.home_city
+	 ,m.home_street
+	 ,m.home_zipcode
+	 ,m.name
+	 ,m.s_date
+	 ,m.e_date
+	 ,m.team_id
+	 ,t.team_id
+	 ,t.team_name
+ FROM
+ 	Members m
+ LEFT OUTER JOIN Team t ON m.team_id = t.team_id
+</select>
+<select id="findById" resultMap="memberMap">
+ SELECT
+	  m.id
+	 ,m.home_city
+	 ,m.home_street
+	 ,m.home_zipcode
+	 ,m.name
+	 ,m.s_date
+	 ,m.e_date
+	 ,m.team_id
+	 ,t.team_id
+	 ,t.team_name
+ FROM
+ 	Members m
+ LEFT OUTER JOIN Team t ON m.team_id = t.team_id
+WHERE id = #{id}
+
+</select>
+<delete id="deleteById" parameterType="com.example.domain.Member">
+ DELETE 
+ FROM 
+ 	Members
+ WHERE id = #{id} 
+</delete>
+<insert id="insert" parameterType="com.example.domain.Member">
+ INSERT
+ INTO
+ 	Members
+ (
+  home_city
+ ,home_street
+ ,home_zipcode
+ ,name
+ ,s_date
+ ,e_date
+ ,team_id
+ )
+ VALUES
+ (
+   #{homeCity}
+  ,#{homeStreet}
+  ,#{homeZipCode}
+  ,#{name}
+  ,#{sDate}
+  ,#{eDate}
+  ,#{teamId}
+ )
+</insert>
+</mapper>

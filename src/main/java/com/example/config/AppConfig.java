@@ -19,7 +19,7 @@ public class AppConfig {
 		SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
 		factoryBean.setDataSource(ds);
 		PathMatchingResourcePatternResolver r = new PathMatchingResourcePatternResolver();
-		factoryBean.setMapperLocations(r.getResources("classpath:/mapper/**/*.xml"));
+		factoryBean.setMapperLocations(r.getResources("classpath:/com/example/domain/**/*.xml"));
 		return factoryBean.getObject();
 	}
 	@Bean(destroyMethod="clearCache")

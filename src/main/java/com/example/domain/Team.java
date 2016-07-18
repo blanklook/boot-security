@@ -1,11 +1,12 @@
 package com.example.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Team {
 	private int id;
 	private String name;
-	private List<Member> members;
+	private List<Member> members = new ArrayList<>();
 	
 	public Team() {}
 	public Team(String name) {
