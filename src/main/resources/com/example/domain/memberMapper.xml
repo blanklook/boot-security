@@ -21,7 +21,7 @@
 	<id column="team_id" property="id" />
 	<result column="team_name" property="name" />
 </resultMap>
-<select id="findAll" resultMap="memberMap">
+<sql id="find">
  SELECT
 	  m.id
 	 ,m.home_city
@@ -36,24 +36,13 @@
  FROM
  	Members m
  LEFT OUTER JOIN Team t ON m.team_id = t.team_id
+</sql>
+<select id="findAll" resultMap="memberMap">
+	<include refid="find" />
 </select>
 <select id="findById" resultMap="memberMap">
- SELECT
-	  m.id
-	 ,m.home_city
-	 ,m.home_street
-	 ,m.home_zipcode
-	 ,m.name
-	 ,m.s_date
-	 ,m.e_date
-	 ,m.team_id
-	 ,t.team_id
-	 ,t.team_name
- FROM
- 	Members m
- LEFT OUTER JOIN Team t ON m.team_id = t.team_id
-WHERE id = #{id}
-
+	<include refid="find" />
+	WHERE id = #{id}
 </select>
 <delete id="deleteById" parameterType="com.example.domain.Member">
  DELETE 

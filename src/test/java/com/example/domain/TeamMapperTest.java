@@ -38,6 +38,5 @@ public class TeamMapperTest {
 		Team t = mapper.findByName("TEAM A");
 		assertThat(t, is(notNullValue()));
 		assertThat(t.getMembers().size(), is(100));
-		t.getMembers().forEach(System.out::println);
 	}
 }

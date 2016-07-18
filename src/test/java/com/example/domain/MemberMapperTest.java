@@ -40,7 +40,11 @@ public class MemberMapperTest {
 	}
 	@Test
 	public void testDeleteById() {
+		int size = mapper.findAll().size();
+		assertThat(size, is(200));
 		Member m = mapper.findById(1);
 		mapper.deleteById(m);
+		size = mapper.findAll().size();
+		assertThat(size, is(199));
 	}
 }
