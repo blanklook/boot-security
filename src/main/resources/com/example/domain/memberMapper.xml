@@ -42,7 +42,21 @@
 </select>
 <select id="findById" resultMap="memberMap">
 	<include refid="find" />
-	WHERE id = #{id}
+		WHERE id = #{id}
+</select>
+<select id="findOneByName" resultMap="memberMap">
+	<include refid="find" />
+	WHERE id > 0
+	<if test="name != null">
+		AND name = #{name}
+	</if>
+</select>
+<select id="findAllByName" resultMap="memberMap">
+	<include refid="find" />
+		WHERE id > 0
+	<if test="name != null">
+		AND name LIKE #{name}||'%'
+	</if>
 </select>
 <delete id="deleteById" parameterType="com.example.domain.Member">
  DELETE 

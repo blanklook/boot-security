@@ -47,4 +47,19 @@ public class MemberMapperTest {
 		size = mapper.findAll().size();
 		assertThat(size, is(199));
 	}
+	@Test
+	public void testFindOneByName() {
+		Member member = new Member();
+		member.setName("name 1");
+		Member findMember = mapper.findOneByName(member);
+		assertThat(findMember, is(notNullValue()));
+	}
+	@Test
+	public void testFindAllByName() {
+		Member member = new Member();
+		member.setName("name");
+		int size = mapper.findAllByName(member).size();
+		assertThat(size, is(200));
+		
+	}
 }
